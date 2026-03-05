@@ -14,11 +14,11 @@
     forAllSystems = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
     nixpkgsFor = forAllSystems (system: import nixpkgs {inherit system;});
   in {
-    # devShells = forAllSystems (
-    #   system: {
-    #     default = import ./shell.nix {pkgs = nixpkgsFor.${system};};
-    #   }
-    # );
+    devShells = forAllSystems (
+      system: {
+        default = import ./shell.nix {pkgs = nixpkgsFor.${system};};
+      }
+    );
 
     packages = forAllSystems (
       system: let
