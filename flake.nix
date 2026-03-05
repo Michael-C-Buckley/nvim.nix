@@ -30,9 +30,9 @@
           initLua =
             # lua
             ''
+              require("base")
               require("utility")
               require("languages.nix")
-              require('ayu').colorscheme()
             '';
           plugins = {
             start = with pkgs.vimPlugins; [
