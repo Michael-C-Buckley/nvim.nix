@@ -1,54 +1,25 @@
-return {
-    "neovim/nvim-lspconfig",
-    config = function()
-        local lspconfig = require("lspconfig")
-        local capabilities = vim.lsp.protocol.make_client_capabilities()
+local M = {}
 
-        -- Attach keymaps only when LSP connects
-        vim.api.nvim_create_autocmd("LspAttach", {
-            group = vim.api.nvim_create_augroup("lsp_attach_keymaps", { clear = true }),
-            callback = function(event)
-                local map = function(keys, func, desc)
-                    vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
-                end
+M.capabilities = vim.lsp.protocol.make_client_capabilities()
 
-                map("gd", vim.lsp.buf.definition, "Go to Definition")
-                map("gD", vim.lsp.buf.declaration, "Go to Declaration")
-                map("gr", vim.lsp.buf.references, "References")
-                map("K", vim.lsp.buf.hover, "Hover Docs")
-                map("<leader>rn", vim.lsp.buf.rename, "Rename")
-                map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
-                map("<leader>f", vim.lsp.buf.format, "Format")
-                map("[d", vim.diagnostic.goto_prev, "Prev Diagnostic")
-                map("]d", vim.diagnostic.goto_next, "Next Diagnostic")
-            end,
-        })
+-- Attach keymaps only when LSP connects
+vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("lsp_attach_keymaps", { clear = true }),
+    callback = function(event)
+        local map = function(keys, func, desc)
+            vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+        end
 
-        -- Nix — nil_ls is the main one, alejandra for formatting
-        lspconfig.nil_ls.setup({
-            capabilities = capabilities,
-            settings = {
-                ["nil"] = {
-                    formatting = { command = { "alejandra" } },
-                    nix = { flake = { autoArchive = false } },
-                },
-            },
-        })
-
-        -- Lua — for editing this config
-        lspconfig.lua_ls.setup({
-            capabilities = capabilities,
-            settings = {
-                Lua = {
-                    runtime = { version = "LuaJIT" },
-                    workspace = {
-                        checkThirdParty = false,
-                        library = vim.api.nvim_get_runtime_file("", true),
-                    },
-                    diagnostics = { globals = { "vim" } },
-                    telemetry = { enable = false },
-                },
-            },
-        })
+        map("gd", vim.lsp.buf.definition, "Go to Definition")
+        map("gD", vim.lsp.buf.declaration, "Go to Declaration")
+        map("gr", vim.lsp.buf.references, "References")
+        map("K", vim.lsp.buf.hover, "Hover Docs")
+        map("<leader>rn", vim.lsp.buf.rename, "Rename")
+        map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+        map("<leader>f", vim.lsp.buf.format, "Format")
+        map("[d", vim.diagnostic.goto_prev, "Prev Diagnostic")
+        map("]d", vim.diagnostic.goto_next, "Next Diagnostic")
     end,
-}
+})
+
+return M

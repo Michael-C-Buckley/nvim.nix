@@ -23,20 +23,34 @@
     packages = forAllSystems (
       system: let
         pkgs = nixpkgsFor.${system};
+
+        vimPlugins = with pkgs.vimPlugins; [
+          neovim-ayu
+          mini-nvim
+          oil-nvim
+          gitsigns-nvim
+          todo-comments-nvim
+          snacks-nvim
+          nvim-lspconfig
+        ];
       in {
         default = mnw.lib.wrap pkgs {
           neovim = pkgs.neovim-unwrapped;
-          extraBinPath = with pkgs; [lazygit];
+          extraBinPath = with pkgs; [
+            # General
+            lazygit
+
+            # Nix
+            nil
+            nixd
+            alejandra
+
+            # Lua
+            luajitPackages.lua-lsp
+          ];
           initLua = builtins.readFile ./nvim/init.lua;
           plugins = {
-            start = with pkgs.vimPlugins; [
-              neovim-ayu
-              mini-nvim
-              oil-nvim
-              gitsigns-nvim
-              todo-comments-nvim
-              snacks-nvim
-            ];
+            start = vimPlugins;
             dev.config.pure = ./nvim;
           };
         };

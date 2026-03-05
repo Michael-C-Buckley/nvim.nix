@@ -1,3 +1,6 @@
 require("base")
 require("utility")
+require("languages.lsp")
+--require("languages.treesitter")
 require("languages.nix")
+require("languages.lua")
