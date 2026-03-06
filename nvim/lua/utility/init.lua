@@ -3,6 +3,7 @@ require("todo-comments").setup()
 
 require("utility.autocmds")
 require("utility.blink")
+require("utility.conform")
 require("utility.oil")
 require("utility.vim")
 require("utility.snacks")

@@ -10,6 +10,7 @@ with pkgs.vimPlugins;
 
     # Language
     nvim-lspconfig
+    conform-nvim
 
     # Navigation
     oil-nvim
