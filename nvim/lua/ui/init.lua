@@ -1,4 +1,6 @@
 require("mini.icons").setup()
-require('ui.tabline')
-require('ui.statusline')
-
+require("mini.tabline").setup()
+require("mini.statusline").setup()
+require("mini.cursorword").setup()
+require("mini.notify").setup()
+require("mini.starter").setup()
