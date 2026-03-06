@@ -1,24 +1,32 @@
 {pkgs}:
-with pkgs.vimPlugins; [
-  # Plugin Packs
-  mini-nvim
-  snacks-nvim
+with pkgs.vimPlugins;
+  [
+    # Plugin Packs
+    mini-nvim
+    snacks-nvim
 
-  # Themes
-  neovim-ayu
+    # Themes
+    neovim-ayu
 
-  # Language
-  nvim-lspconfig
+    # Language
+    nvim-lspconfig
 
-  # Navigation
-  oil-nvim
+    # Navigation
+    oil-nvim
 
-  # UI
-  gitsigns-nvim
-  todo-comments-nvim
+    # UI
+    gitsigns-nvim
+    todo-comments-nvim
 
-  # Completion
-  blink-cmp
-  luasnip
-  friendly-snippets
-]
+    # Completion
+    blink-cmp
+    luasnip
+    friendly-snippets
+  ]
+  ++ [
+    (nvim-treesitter.withPlugins (p:
+      with p; [
+        tree-sitter-lua
+        tree-sitter-nix
+      ]))
+  ]
