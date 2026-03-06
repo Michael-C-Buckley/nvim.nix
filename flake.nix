@@ -34,6 +34,11 @@
           nvim-lspconfig
           lualine-nvim
           bufferline-nvim
+
+          # Completion
+          blink-cmp
+          luasnip
+          friendly-snippets
         ];
       in {
         default = mnw.lib.wrap pkgs {
