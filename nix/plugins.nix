@@ -16,8 +16,6 @@ with pkgs.vimPlugins; [
   # UI
   gitsigns-nvim
   todo-comments-nvim
-  lualine-nvim
-  bufferline-nvim
 
   # Completion
   blink-cmp
