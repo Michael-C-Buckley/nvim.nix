@@ -1,8 +1,8 @@
-require('gitsigns').setup()
+require("gitsigns").setup()
 require("todo-comments").setup()
 
 require("utility.autocmds")
-require('utility.blink')
+require("utility.blink")
 require("utility.oil")
 require("utility.vim")
 require("utility.snacks")

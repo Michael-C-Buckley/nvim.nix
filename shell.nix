@@ -10,6 +10,11 @@ pkgs.mkShellNoCC {
       mdformat
       alejandra
       treefmt
+      stylua
+
+      # Lua
+      stylua
+      luajitPackages.luacheck
 
       # Hooks
       lefthook

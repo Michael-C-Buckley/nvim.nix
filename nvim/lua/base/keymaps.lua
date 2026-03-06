@@ -2,9 +2,9 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local map = function(mode, lhs, rhs, opts)
-    opts = opts or {}
-    opts.silent = true
-    vim.keymap.set(mode, lhs, rhs, opts)
+	opts = opts or {}
+	opts.silent = true
+	vim.keymap.set(mode, lhs, rhs, opts)
 end
 
 local allModes = { "n", "i", "v", "c", "t", "o", "x", "s" }

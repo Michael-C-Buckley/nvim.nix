@@ -14,7 +14,7 @@ run = "nil diagnostics --deny-warnings {staged_files}"
 
 [[pre-commit.jobs]]
 interactive = true
-name = "alejandra"
+name = "treefmt"
 run = "treefmt --config-file .config/treefmt.toml {staged_files}"
 stage_fixed = true
 
@@ -27,3 +27,9 @@ run = "statix check -c .config/statix.toml --format errfmt"
 [[pre-commit.jobs]]
 name = "typos"
 run = "typos -c .config/typos.toml {staged_files}"
+
+[[pre-commit.jobs]]
+name = "luacheck"
+run = "luacheck --config .config/luacheck.lua {staged_files}"
+exclude = ".config/luacheck.lua"
+glob = "*.lua"

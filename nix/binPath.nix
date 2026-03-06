@@ -10,4 +10,5 @@ with pkgs; [
 
   # Lua
   luajitPackages.lua-lsp
+  stylua
 ]

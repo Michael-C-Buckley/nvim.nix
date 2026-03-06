@@ -8,3 +8,7 @@ includes = ["*.nix"]
 [formatter.mdformat]
 command = "mdformat"
 includes = ["*.md"]
+
+[formatter.stylua]
+command = "stylua"
+includes = ["*.lua"]
