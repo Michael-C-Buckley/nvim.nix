@@ -27,12 +27,19 @@
         vimPlugins = import ./nix/plugins.nix {inherit pkgs;};
       in {
         default = mnw.lib.wrap pkgs {
-          neovim = pkgs.neovim-unwrapped;
           extraBinPath = import ./nix/binPath.nix {inherit pkgs;};
           initLua = builtins.readFile ./nvim/init.lua;
           plugins = {
             start = vimPlugins;
             dev.config.pure = ./nvim;
+          };
+          providers.python3 = {
+            enable = true;
+            extraPackages = p:
+              with p; [
+                debugpy
+                pynvim
+              ];
           };
         };
       }

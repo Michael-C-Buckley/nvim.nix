@@ -11,6 +11,9 @@ with pkgs.vimPlugins;
     # Language
     nvim-lspconfig
     conform-nvim
+    nvim-dap
+    nvim-dap-ui
+    nvim-dap-python
 
     # Navigation
     oil-nvim
@@ -29,5 +32,6 @@ with pkgs.vimPlugins;
       with p; [
         tree-sitter-lua
         tree-sitter-nix
+        tree-sitter-python
       ]))
   ]
