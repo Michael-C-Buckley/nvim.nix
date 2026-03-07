@@ -9,7 +9,7 @@ with pkgs; [
   alejandra
 
   # Lua
-  luajitPackages.lua-lsp
+  lua-language-server
   stylua
 
   # Python

@@ -2,7 +2,7 @@ local lsp = require("languages.lsp")
 
 -- Lua LSP — for editing this config
 vim.lsp.config("lua_ls", {
-	cmd = { "lua-lsp" },
+	cmd = { "lua-language-server" },
 	capabilities = lsp.capabilities,
 	settings = {
 		Lua = {
