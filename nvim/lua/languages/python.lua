@@ -5,6 +5,8 @@ local dap_python = require("dap-python")
 -- ── LSP ──────────────────────────────────────────────────────────────────────
 
 vim.lsp.config("basedpyright", {
+	filetypes = { "python" },
+	root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git" },
 	capabilities = lsp.capabilities,
 	settings = {
 		basedpyright = {
@@ -19,6 +21,8 @@ vim.lsp.config("basedpyright", {
 })
 
 vim.lsp.config("ruff", {
+	filetypes = { "python" },
+	root_markers = { "pyproject.toml", "ruff.toml", ".ruff.toml", "setup.py", ".git" },
 	capabilities = lsp.capabilities,
 	on_attach = function(client)
 		-- Disable hover so basedpyright handles it instead

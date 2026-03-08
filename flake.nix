@@ -30,7 +30,8 @@
           extraBinPath = import ./nix/binPath.nix {inherit pkgs;};
           initLua = builtins.readFile ./nvim/init.lua;
           plugins = {
-            start = vimPlugins;
+            inherit (vimPlugins) start;
+            opt = vimPlugins.lazy;
             dev.config.pure = ./nvim;
           };
           providers.python3 = {

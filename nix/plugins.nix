@@ -1,37 +1,40 @@
-{pkgs}:
-with pkgs.vimPlugins;
-  [
-    # Plugin Packs
+{pkgs}: {
+  start = with pkgs.vimPlugins; [
     mini-nvim
     snacks-nvim
-
-    # Themes
     neovim-ayu
 
-    # Language
-    nvim-lspconfig
-    conform-nvim
-    nvim-dap
-    nvim-dap-ui
-    nvim-dap-python
-
-    # Navigation
-    oil-nvim
-
-    # UI
-    gitsigns-nvim
-    todo-comments-nvim
-
-    # Completion
-    blink-cmp
     luasnip
     friendly-snippets
-  ]
-  ++ [
-    (nvim-treesitter.withPlugins (p:
-      with p; [
-        tree-sitter-lua
-        tree-sitter-nix
-        tree-sitter-python
-      ]))
-  ]
+    nvim-dap
+  ];
+
+  lazy = with pkgs.vimPlugins;
+    [
+      # Language
+      nvim-lspconfig
+      conform-nvim
+
+      # Navigation
+      oil-nvim
+
+      # UI
+      gitsigns-nvim
+      todo-comments-nvim
+
+      # Completion
+      blink-cmp
+
+      # Debug
+      nvim-dap-ui
+      nvim-dap-python
+    ]
+    ++ [
+      (nvim-treesitter.withPlugins (p:
+        with p; [
+          tree-sitter-lua
+          tree-sitter-nix
+          tree-sitter-python
+        ]))
+    ];
+}

@@ -15,6 +15,8 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Nil ---------------------------
 
 vim.lsp.config("nil_ls", {
+	filetypes = { "nix" },
+	root_markers = { "flake.nix", ".git" },
 	capabilities = lsp.capabilities,
 	settings = {
 		["nil"] = {
@@ -30,7 +32,8 @@ vim.lsp.enable("nil_ls")
 
 vim.lsp.config("nixd", {
 	cmd = { "nixd" },
-	root_dir = vim.fn.getcwd(),
+	filetypes = { "nix" },
+	root_markers = { "flake.nix", ".git" },
 	settings = {
 		nixd = {
 			enableFormatting = false,
