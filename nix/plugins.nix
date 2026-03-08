@@ -28,6 +28,14 @@
       # Debug
       nvim-dap-ui
       nvim-dap-python
+
+      # Extra Themes
+      kanso-nvim
+      bamboo-nvim
+      kanagawa-nvim
+      gruvbox-nvim
+      tokyonight-nvim
+      catppuccin-nvim
     ]
     ++ [
       (nvim-treesitter.withPlugins (p:
