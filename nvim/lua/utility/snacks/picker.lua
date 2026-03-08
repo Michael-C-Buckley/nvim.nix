@@ -1,40 +1,23 @@
-local map = vim.keymap.set
+require("snacks")
+local picker = Snacks.picker
+local function bind_picker(bind, func, desc)
+	vim.keymap.set("n", bind, function()
+		func()
+	end, { desc = desc })
+end
 
 -- Files
-map("n", "<leader><space>", function()
-	Snacks.picker.smart()
-end, { desc = "Smart find files" })
-
-map("n", "<leader>f", function()
-	Snacks.picker.files()
-end, { desc = "Find files" })
-
-map("n", "<leader>r", function()
-	Snacks.picker.recent()
-end, { desc = "Recent files" })
-
-map("n", "<leader>e", function()
-	Snacks.picker.explorer()
-end, { desc = "File Explorer" })
-
-map("n", "<leader>q", function()
-	Snacks.picker()
-end, { desc = "Browse Pickers" })
+bind_picker("<leader><space>", picker.smart, "Smart find files")
+bind_picker("<leader>f", picker.files, "Find files")
+bind_picker("<leader>r", picker.recent, "Recent files")
+bind_picker("<leader>e", picker.explorer, "File Explorer")
+bind_picker("<leader>q", picker, "Browse Pickers")
 
 -- Search
-map("n", "<leader>/", function()
-	Snacks.picker.grep()
-end, { desc = "Grep" })
-
-map("n", "<leader>b", function()
-	Snacks.picker.buffers()
-end, { desc = "Buffers" })
+bind_picker("<leader>/", picker.grep, "Grep")
+bind_picker("<leader>b", picker.buffers, "Buffers")
+bind_picker("<leader>cs", picker.colorschemes, "Color Schemes")
 
 -- LSP (replaces telescope for these)
-map("n", "gr", function()
-	Snacks.picker.lsp_references()
-end, { desc = "LSP References" })
-
-map("n", "gd", function()
-	Snacks.picker.lsp_definitions()
-end, { desc = "LSP Definitions" })
+bind_picker("gr", picker.lsp_references, "LSP References")
+bind_picker("gd", picker.lsp_definitions, "LSP Definitions")

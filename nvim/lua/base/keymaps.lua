@@ -21,6 +21,8 @@ map(allModes, "<M-.>", ":bnext<CR>")
 map(allModes, "<M-w>", ":bdelete<CR>")
 
 -- Window navigation
+map(allModes, "<M-a>", "<C-w>w")
+map(allModes, "<M-v>", "<C-w>v")
 map("n", "<C-h>", "<C-w>h")
 map("n", "<C-j>", "<C-w>j")
 map("n", "<C-k>", "<C-w>k")
