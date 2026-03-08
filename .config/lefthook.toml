@@ -29,7 +29,7 @@ name = "typos"
 run = "typos -c .config/typos.toml {staged_files}"
 
 [[pre-commit.jobs]]
-name = "luacheck"
-run = "luacheck --config .config/luacheck.lua {staged_files}"
+name = "selene"
+run = "selene --config .config/selene.toml {staged_files}"
 exclude = ".config/luacheck.lua"
 glob = "*.lua"

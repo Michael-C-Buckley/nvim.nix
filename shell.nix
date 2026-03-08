@@ -14,7 +14,7 @@ pkgs.mkShellNoCC {
 
       # Lua
       stylua
-      luajitPackages.luacheck
+      selene
 
       # Hooks
       lefthook
