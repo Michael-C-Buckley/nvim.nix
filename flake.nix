@@ -26,7 +26,11 @@
 
         vimPlugins = import ./nix/plugins.nix {inherit pkgs;};
       in {
+        # Alias for the devshell package set
+        buildEnv = import ./nix/buildEnv {inherit pkgs;};
+        # Alias for the main package
         nvim = self.packages.${system}.default;
+        # Where the main package is actually configured
         default = mnw.lib.wrap pkgs {
           extraBinPath = import ./nix/binPath.nix {inherit pkgs;};
           initLua = builtins.readFile ./nvim/init.lua;
