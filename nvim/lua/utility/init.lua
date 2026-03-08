@@ -25,6 +25,6 @@ vim.api.nvim_create_autocmd("FileType", {
 	callback = function()
 		vim.cmd("packadd nvim-dap")
 		vim.cmd("packadd nvim-dap-ui")
-		require("utility.dap")
+		require("nvim.lua.utility.dap_config")
 	end,
 })
