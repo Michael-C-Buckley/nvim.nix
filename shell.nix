@@ -4,25 +4,8 @@
 }:
 pkgs.mkShellNoCC {
   name = "default";
-  buildInputs = with pkgs;
-    [
-      # Formatting
-      mdformat
-      alejandra
-      treefmt
-      stylua
-
-      # Lua
-      stylua
-      selene
-
-      # Hooks
-      lefthook
-      deadnix
-      statix
-      typos
-      nil
-    ]
+  buildInputs =
+    [(import ./nix/buildEnv.nix {inherit pkgs;})]
     ++ extraPkgs;
 
   shellHook = ''

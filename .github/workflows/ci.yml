@@ -1,0 +1,43 @@
+---
+name: Nvim Check
+"on":
+  push:
+    branches: [master, main]
+    paths:
+      - "flake.*"
+      - "nix/**"
+      - "nvim/**"
+  pull_request:
+    branches: [master, main]
+    paths:
+      - "flake.*"
+      - "nix/**"
+      - "nvim/**"
+  workflow_dispatch:
+jobs:
+  nvim-checks:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Nix
+        uses: cachix/install-nix-action@v27
+        with:
+          nix_path: nixpkgs=flake:nixpkgs
+      - name: Check for dead code with deadnix
+        run: nix run nixpkgs#deadnix -- --fail --exclude _sources/ .
+      - name: Check for antipatterns with statix
+        run: nix run nixpkgs#statix -- check -c .config/statix.toml .
+      - name: Check spelling with typos
+        run: nix run nixpkgs#typos -- -c .config/typos.toml .
+      - name: Check lua with Selene
+        run: nix run nixpkgs#selene -- --config .config/selene nvim/
+      - name: Check formatting with treefmt
+        run: |
+          nix shell .#buildEnv --run \
+            "treefmt --config-file .config/treefmt.toml --fail-on-change ."
+      - name: Check Flake
+        run: nix flake check
+      - name: Check Nvim
+        run: nix run .#nvim -- --headless "+qa"
