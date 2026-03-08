@@ -7,9 +7,9 @@
   };
 
   outputs = {
+    self,
     nixpkgs,
     mnw,
-    ...
   }: let
     forAllSystems = nixpkgs.lib.genAttrs ["x86_64-linux" "aarch64-linux" "aarch64-darwin"];
     nixpkgsFor = forAllSystems (system: import nixpkgs {inherit system;});
@@ -26,6 +26,7 @@
 
         vimPlugins = import ./nix/plugins.nix {inherit pkgs;};
       in {
+        nvim = self.packages.${system}.default;
         default = mnw.lib.wrap pkgs {
           extraBinPath = import ./nix/binPath.nix {inherit pkgs;};
           initLua = builtins.readFile ./nvim/init.lua;
