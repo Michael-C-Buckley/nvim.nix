@@ -34,9 +34,7 @@ jobs:
       - name: Check lua with Selene
         run: nix run nixpkgs#selene -- --config .config/selene.toml nvim/
       - name: Check formatting with treefmt
-        run: |
-          nix shell .#buildEnv --run \
-            "treefmt --config-file .config/treefmt.toml --fail-on-change ."
+        run: nix-shell --run "treefmt --config-file .config/treefmt.toml --fail-on-change ."
       - name: Check Flake
         run: nix flake check
       - name: Check Nvim
