@@ -33,6 +33,15 @@ map("n", "<C-l>", "<C-w>l")
 map("v", "J", ":m '>+1<cr>gv=gv")
 map("v", "K", ":m '<-2<cr>gv=gv")
 
+-- Commenting
+map("n", "<C-/>", function()
+	MiniComment.toggle_lines(vim.fn.line("."), vim.fn.line("."))
+end, { desc = "Toggle comment" })
+
+map("v", "<C-/>", function()
+	MiniComment.toggle_lines(vim.fn.line("'<"), vim.fn.line("'>"))
+end, { desc = "Toggle comment" })
+
 -- Overridden Binds
 -- These will be overwritten by something else, and exist just for information
 -- like to inform that a certain plugin hasn't been loaded yet

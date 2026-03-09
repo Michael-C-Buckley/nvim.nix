@@ -13,6 +13,8 @@ globals:
     any: true
   Snacks:
     any: true
+  MiniComment:
+    any: true
   assert:
     args:
       - type: bool

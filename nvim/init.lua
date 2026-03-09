@@ -1,6 +1,6 @@
 require("base")
 require("utility")
 require("languages")
-require("ui")
+require("ui.mini")
 
 require("ayu").colorscheme()
