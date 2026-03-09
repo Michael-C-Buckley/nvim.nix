@@ -24,5 +24,3 @@ bind_picker("<leader>cs", picker.colorschemes, "Color Schemes", "base.theme")
 -- LSP (replaces telescope for these)
 bind_picker("gr", picker.lsp_references, "LSP References")
 bind_picker("gd", picker.lsp_definitions, "LSP Definitions")
-
--- Color Schemes will lazy load additional themes

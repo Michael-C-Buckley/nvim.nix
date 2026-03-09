@@ -14,6 +14,7 @@ map("n", "<leader>w", "<cmd>write<cr>", { desc = "Save" })
 map("n", "<leader>qq", "<cmd>quit<cr>", { desc = "Quit" })
 map("n", "<Esc>", "<cmd>nohlsearch<cr>")
 map(allModes, "<F1>", "<Nop>") -- Disable F1
+map(allModes, "<C-s>", ":write<cr>")
 
 -- Buffer navigation
 map(allModes, "<M-,>", ":bprevious<CR>")
