@@ -1,32 +1,32 @@
-{pkgs}: {
-  start = with pkgs.vimPlugins;
-    [
+{pkgs}: let
+  grammars = map (a: pkgs.lib.concatStrings ["tree-sitter-" a]) [
+    "bash"
+    "lua"
+    "nix"
+    "python"
+    "nu"
+    "json"
+    "go"
+    "rust"
+    "markdown"
+    "diff"
+    "yang"
+  ];
+in {
+  start = builtins.attrValues {
+    inherit
+      (pkgs.vimPlugins)
       mini-nvim
       snacks-nvim
       neovim-ayu
-
       luasnip
       friendly-snippets
       nvim-dap
-    ]
-    ++ [
-      (nvim-treesitter.withPlugins
-        (p:
-          with p; [
-            tree-sitter-lua
-            tree-sitter-nix
-            tree-sitter-python
-            tree-sitter-nu
-            tree-sitter-json
-            tree-sitter-bash
-            tree-sitter-go
-            tree-sitter-json
-            tree-sitter-rust
-            tree-sitter-markdown
-            tree-sitter-diff
-            tree-sitter-yang
-          ]))
-    ];
+      ;
+
+    treesitter =
+      pkgs.vimPlugins.nvim-treesitter.withPlugins (p: map (a: p.${a}) grammars);
+  };
 
   lazy = with pkgs.vimPlugins; [
     # Language
