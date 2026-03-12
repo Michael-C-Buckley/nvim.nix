@@ -1,5 +1,6 @@
 local lsp = require("languages.lsp")
-local dap = require("utility.dap_config")
+vim.cmd("packadd nvim-dap")
+local dap = require("dap")
 
 vim.cmd("packadd nvim-dap-python")
 local dap_python = require("dap-python")
@@ -43,6 +44,8 @@ dap_python.test_runner = "pytest"
 -- ── Additional launch configurations ─────────────────────────────────────────
 -- nvim-dap-python already registers a "Launch file" and test configs;
 -- we append extra useful ones.
+
+dap.configurations.python = dap.configurations.python or {}
 
 table.insert(dap.configurations.python, {
 	type = "python",
