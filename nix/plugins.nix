@@ -11,6 +11,7 @@
     "markdown"
     "diff"
     "yang"
+    "kdl"
   ];
 in {
   start = builtins.attrValues {
