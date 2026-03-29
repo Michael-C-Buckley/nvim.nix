@@ -1,6 +1,7 @@
 {pkgs}:
 with pkgs; [
   # General
+  git
   lazygit
 
   # Nix
