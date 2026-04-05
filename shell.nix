@@ -1,19 +1,51 @@
 {
   pkgs ? import <nixpkgs> {},
   extraPkgs ? [],
-}:
-pkgs.mkShellNoCC {
-  name = "default";
-  buildInputs =
-    [(import ./nix/buildEnv.nix {inherit pkgs;})]
-    ++ extraPkgs;
+}: let
+  # Wrap the pre-commit to not interfere with anyone's PATH for tools they use
+  runtimeEnv = pkgs.buildEnv {
+    name = "nvim-devshell-runtime-env";
+    pathsToLink = ["/bin"];
+    paths = with pkgs; [
+      # Formatting
+      mdformat
+      alejandra
+      treefmt
+      stylua
 
-  # Note to myself for pushing config
-  # git config url."git@github.com:".pushInsteadOf "https://github.com/"
-  shellHook = ''
-    lefthook install
-    git fetch
-    git status --short --branch
-    export PATH="$PATH:/usr/local/bin"
-  '';
-}
+      # Lua
+      stylua
+      selene
+
+      # Nix
+      deadnix
+      statix
+      nil
+
+      # Hooks
+      typos
+    ];
+  };
+  lefthook = pkgs.symlinkJoin {
+    name = "lefthook";
+    paths = [pkgs.lefthook];
+    nativeBuildInputs = [pkgs.makeWrapper];
+    postBuild = ''
+      wrapProgram $out/bin/lefthook \
+        --prefix PATH : ${runtimeEnv}/bin
+    '';
+  };
+in
+  pkgs.mkShellNoCC {
+    name = "default";
+    buildInputs = [lefthook] ++ extraPkgs;
+
+    # Note to myself for pushing config
+    # git config url."git@github.com:".pushInsteadOf "https://github.com/"
+    shellHook = ''
+      lefthook install
+      git fetch
+      git status --short --branch
+      export PATH="$PATH:/usr/local/bin"
+    '';
+  }

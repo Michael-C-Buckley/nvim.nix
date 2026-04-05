@@ -26,8 +26,6 @@
 
         vimPlugins = import ./nix/plugins.nix {inherit pkgs;};
       in {
-        # Alias for the devshell package set
-        buildEnv = import ./nix/buildEnv.nix {inherit pkgs;};
         # Alias for the main package
         nvim = self.packages.${system}.default;
         # Where the main package is actually configured
