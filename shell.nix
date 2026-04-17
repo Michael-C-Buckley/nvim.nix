@@ -3,29 +3,7 @@
   extraPkgs ? [],
 }: let
   # Wrap the pre-commit to not interfere with anyone's PATH for tools they use
-  runtimeEnv = pkgs.buildEnv {
-    name = "nvim-devshell-runtime-env";
-    pathsToLink = ["/bin"];
-    paths = with pkgs; [
-      # Formatting
-      mdformat
-      alejandra
-      treefmt
-      stylua
-
-      # Lua
-      stylua
-      selene
-
-      # Nix
-      deadnix
-      statix
-      nil
-
-      # Hooks
-      typos
-    ];
-  };
+  runtimeEnv = import ./nix/shellEnv.nix {inherit pkgs;};
   lefthook = pkgs.symlinkJoin {
     name = "lefthook";
     paths = [pkgs.lefthook];
