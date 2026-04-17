@@ -25,16 +25,20 @@ jobs:
         uses: cachix/install-nix-action@v27
         with:
           nix_path: nixpkgs=flake:nixpkgs
+      - name: Add shell tools to PATH
+        run: |
+          nix build .#shell
+          echo "$(readlink -f result)/bin" >> "$GITHUB_PATH"
       - name: Check for dead code with deadnix
-        run: nix run nixpkgs#deadnix -- --fail --exclude _sources/ .
+        run: deadnix --fail --exclude _sources/ .
       - name: Check for antipatterns with statix
-        run: nix run nixpkgs#statix -- check -c .config/statix.toml .
+        run: statix check -c .config/statix.toml .
       - name: Check spelling with typos
-        run: nix run nixpkgs#typos -- -c .config/typos.toml .
+        run: typos -c .config/typos.toml .
       - name: Check lua with Selene
-        run: nix run nixpkgs#selene -- --config .config/selene.toml nvim/
+        run: selene --config .config/selene.toml nvim/
       - name: Check formatting with treefmt
-        run: nix-shell --run "treefmt --config-file .config/treefmt.toml --fail-on-change ."
+        run: treefmt --config-file .config/treefmt.toml --fail-on-change .
       - name: Check Flake
         run: nix flake check
       - name: Check Nvim
